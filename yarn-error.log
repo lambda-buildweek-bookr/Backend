@@ -1,0 +1,31 @@
+Arguments: 
+  C:\DevTools\nodejs\node.exe C:\DevTools\yarn\bin\yarn.js init
+
+PATH: 
+  C:\ProgramData\Oracle\Java\javapath;C:\PROGRAM FILES\COMMON FILES\MICROSOFT SHARED\WINDOWS LIVE;C:\PROGRAM FILES (X86)\COMMON FILES\MICROSOFT SHARED\WINDOWS LIVE;C:\WINDOWS\SYSTEM32;C:\WINDOWS;C:\WINDOWS\SYSTEM32\WBEM;C:\WINDOWS\SYSTEM32\WINDOWSPOWERSHELL\V1.0\;C:\PROGRAM FILES (X86)\ATI TECHNOLOGIES\ATI.ACE\CORE-STATIC;C:\PROGRAM FILES (X86)\WINDOWS LIVE\SHARED;C:\Program Files\WIDCOMM\Bluetooth Software\;C:\Program Files\WIDCOMM\Bluetooth Software\syswow64;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\WINDOWS\System32\OpenSSH\;C:\DevTools\Git\cmd;C:\DevTools\nodejs\;C:\DevTools\yarn\bin\;C:\Users\Jamie2\AppData\Local\Microsoft\WindowsApps;C:\Users\Jamie2\AppData\Local\atom\bin;C:\Users\Jamie2\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Jamie2\AppData\Roaming\npm;C:\Users\Jamie2\AppData\Local\Yarn\bin
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  10.13.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: C:\DevTools\Git\Backend\package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at C:\DevTools\yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\DevTools\yarn\lib\cli.js:304:30)
+      at C:\DevTools\yarn\lib\cli.js:315:13
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
