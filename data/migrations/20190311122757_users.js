@@ -28,7 +28,7 @@ exports.up = function(knex) {
     .createTable("reviews", function(reviews) {
       reviews.increments();
 
-      reviews.text("review").notNullable();
+      reviews.text("review", 255).notNullable();
 
       reviews
         .integer("user_id")
@@ -44,9 +44,9 @@ exports.up = function(knex) {
         .references("id")
         .inTable("books");
 
-      reviews.unique(["user_Id", "book_id"]);
-
       reviews.integer("rating").notNullable();
+
+      reviews.unique(["user_id", "book_id"]);
     });
 };
 
