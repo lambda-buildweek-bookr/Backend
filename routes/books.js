@@ -48,8 +48,7 @@ router.delete("/:id", (req, res) => {
   // update with validationToken
   const  book_id  = req.params.id;
   db("reviews")
-    .where({ bookid: book_id })
-    .first()
+    .where({ book_id: book_id })
     .del()
     .then(book => {
       db("books")
