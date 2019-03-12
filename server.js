@@ -1,7 +1,7 @@
 const express = require('express');
 const logger = require("morgan");
 const helmet = require("helmet");
-cors = require('cors');
+const cors = require('cors');
 
 const usersRouter = require('./routes/users');
 const booksRouter = require('./routes/books');

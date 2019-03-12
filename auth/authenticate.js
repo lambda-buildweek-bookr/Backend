@@ -13,7 +13,7 @@ const secret =
 function generateToken(user) {
   const payload = {
     id: user.id,
-    username: user.name
+    name: user.name
   };
 
   const options = {
