@@ -85,7 +85,7 @@ router.post("/register", (req, res) => {
 
         .catch(err => res.status(500).send(err));
     })
-    .catch(err => res.status(500).send(err));
+    .catch(err => res.status(500).send({message: "Server error. Most likely you are trying to enter a User name that already exists"}));
 });
 
 module.exports = router;
