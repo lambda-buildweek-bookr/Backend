@@ -1,7 +1,7 @@
 exports.up = function(knex) {
   return knex.schema
     .createTable("users", function(users) {
-      users.increments();
+      users.increments('id');
 
       users
         .string("name", 128)
@@ -11,7 +11,7 @@ exports.up = function(knex) {
       users.string("password", 255).notNullable();
     })
     .createTable("books", function(books) {
-      books.increments();
+      books.increments('id');
 
       books.text("title", 255).notNullable();
 
@@ -26,9 +26,9 @@ exports.up = function(knex) {
       books.text("detailed_desc", 255).notNullable();
     })
     .createTable("reviews", function(reviews) {
-      reviews.increments();
+      reviews.increments('id');
 
-      reviews.text("review").notNullable();
+      reviews.text("review", 255).notNullable();
 
       reviews
         .integer("user_id")
@@ -44,9 +44,9 @@ exports.up = function(knex) {
         .references("id")
         .inTable("books");
 
-      reviews.unique(["user_Id", "book_id"]);
-
       reviews.integer("rating").notNullable();
+
+      reviews.unique(["user_id", "book_id"]);
     });
 };
 
