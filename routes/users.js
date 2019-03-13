@@ -2,31 +2,11 @@ const express = require("express");
 const db = require("../data/dbConfig.js");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const auth = require("../auth/authenticate");
+const { restricted } = require("../auth/authenticate");
 
-const secret =
-  process.env.JWT_SECRET ||
-  "Do you want to know a secret? Do you promise not to tell?";
 
-function restricted(req, res, next) {
-  const token = req.headers.authorization;
 
-  if (token) {
-    jwt.verify(token, secret, (err, decodedToken) => {
-      if (err) {
-        res.status(403).json({
-          message: "Are you a hacker? Get out of here!!"
-        });
-      } else {
-        req.decoded = decodedToken;
-        next();
-      }
-    });
-  } else {
-    res.status(401).json({ message: "No token provided" });
-  }
-}
 
 router.get("/", restricted, (req, res) => {
   db("users")

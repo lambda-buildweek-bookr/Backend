@@ -3,7 +3,8 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
   generateToken,
-  validateToken
+  validateToken,
+  restricted
 };
 
 const secret =
@@ -37,5 +38,24 @@ function validateToken(req, res, next) {
     });
   } else {
     res.status(401).json({ Message: "No Token Provided" });
+  }
+}
+
+function restricted(req, res, next) {
+  const token = req.headers.authorization;
+
+  if (token) {
+    jwt.verify(token, secret, (err, decodedToken) => {
+      if (err) {
+        res.status(403).json({
+          message: "Are you a hacker? Get out of here!!"
+        });
+      } else {
+        req.decoded = decodedToken;
+        next();
+      }
+    });
+  } else {
+    res.status(401).json({ message: "No token provided" });
   }
 }

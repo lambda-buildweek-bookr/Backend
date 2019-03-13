@@ -2,17 +2,12 @@
 
 const express = require("express");
 const db = require("../data/dbConfig.js");
-
-// will need auth functions
-
+const { validateToken } = require("../auth/authenticate");
 const router = express.Router();
 
 router.get("/", (req, res) => {
   db("books")
     .then(books => {
-      const bookList = books.map(book => {
-        return { id: book.id, title: book.title, cover_url: book.cover_url };
-      });
       res.status(200).json(books);
     })
     .catch(err =>
@@ -23,17 +18,13 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  const  book_id  = req.params.id;
-  
+  const book_id = req.params.id;
 
   db("books")
     .where({ id: book_id })
     .first()
     .then(book => {
-      
-      res
-        .status(200)
-        .json( book );
+      res.status(200).json(book);
     })
     .catch(err =>
       res.status(500).json({
@@ -44,9 +35,8 @@ router.get("/:id", (req, res) => {
 
 // this is to delete a book. Also have to delete all the reviews associated with that book
 
-router.delete("/:id", (req, res) => {
-  // update with validationToken
-  const  book_id  = req.params.id;
+router.delete("/:id", validateToken, (req, res) => {
+  const book_id = req.params.id;
   db("reviews")
     .where({ book_id: book_id })
     .del()
