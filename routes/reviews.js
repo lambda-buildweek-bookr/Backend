@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
     })
     .catch(err =>
       res.status(500).json({
-        errorMessage: "Server error. Unable to retrieve Reviews"
+        Message: "Server error. Unable to retrieve Reviews"
       })
     );
 });
@@ -31,20 +31,18 @@ router.get("/:book_id", (req, res) => {
           res.status(200).json({ book: book[0], reviews });
         });
     })
-    .catch(err => res.status(500).json({ errorMessage: err }));
+    .catch(err => res.status(500).json({ Message: "Cannot retrieve that book" }));
 });
 
 router.post("/add/:book_id", validateToken, (req, res) => {
   // console.log("req: ", req);
   const { book_id } = req.params;
   const { rating, review, user_id } = req.body;
-  //const { user_id } = req;
-
-  // console.log(book_id, user_id, rating, review);
+ 
   if (!review || !book_id) {
     res
       .status(400)
-      .json({ errorMessage: "Information is incomplete. Please try again." });
+      .json({ Message: "Information is incomplete. Please try again." });
   }
 
   db("reviews")
@@ -56,7 +54,7 @@ router.post("/add/:book_id", validateToken, (req, res) => {
       res
         .status(500)
         .json({
-          errorMessage:
+          Message:
             "Server Error. Most likely cause is that this user has already submitted a review for this book"
         })
     );

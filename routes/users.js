@@ -2,10 +2,7 @@ const express = require("express");
 const db = require("../data/dbConfig.js");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-const auth = require("../auth/authenticate");
-const { restricted } = require("../auth/authenticate");
-
-
+const { restricted, generateToken } = require("../auth/authenticate");
 
 
 router.get("/", restricted, (req, res) => {
@@ -28,7 +25,7 @@ router.post("/login", (req, res) => {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        const token = auth.generateToken(user);
+        const token = generateToken(user);
         res.status(200).json({ token, message: `Welcome ${name}` });
       } else {
         res.status(401).json({ message: "You shall not pass!" });
@@ -57,7 +54,7 @@ router.post("/register", (req, res) => {
         .where({ id })
         .first()
         .then(user => {
-          const token = auth.generateToken(user);
+          const token = generateToken(user);
           res
             .status(201)
             .json({ id: user.id, token, message: "User successfully added" });

@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
     })
     .catch(err =>
       res.status(500).json({
-        errorMessage: "Server error. Unable to retrieve books"
+        Message: "Server error. Unable to retrieve books"
       })
     );
 });
@@ -28,7 +28,7 @@ router.get("/:id", (req, res) => {
     })
     .catch(err =>
       res.status(500).json({
-        errorMessage: "Server error. Unable to retrieve book"
+        Message: "Server error. Unable to retrieve book"
       })
     );
 });
@@ -50,7 +50,7 @@ router.delete("/:id", validateToken, (req, res) => {
         });
     })
     .catch(err =>
-      res.status(500).json({ errorMessage: "Server Error. Cannot delete book" })
+      res.status(500).json({ Message: "Server Error. Cannot delete book" })
     );
 });
 
