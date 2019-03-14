@@ -19,13 +19,14 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:book_id", (req, res) => {
-  const { book_id: id } = req.params;
+  const id = req.params.book_id;
+  console.log(id);
 
   db("books")
     .where({ id })
     .then(book => {
       db.from("reviews")
-        .innerJoin("users", "reviews.user_id", "users.id")
+        .innerJoin("books", "books.id", "reviews.book_id")
         .where("book_id", id)
         .then(reviews => {
           res.status(200).json({ book: book[0], reviews });
@@ -35,7 +36,7 @@ router.get("/:book_id", (req, res) => {
 });
 
 router.post("/add/:book_id", validateToken, (req, res) => {
-  console.log("req: ", req);
+   console.log("req: ", req);
   const { book_id } = req.params;
   const { rating, review, user_id } = req.body;
  
@@ -54,7 +55,7 @@ router.post("/add/:book_id", validateToken, (req, res) => {
       res
         .status(500)
         .json({
-          Message:
+          errorMessage:
             "Server Error. Most likely cause is that this user has already submitted a review for this book"
         })
     );
