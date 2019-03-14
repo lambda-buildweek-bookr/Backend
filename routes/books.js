@@ -41,12 +41,12 @@ router.delete("/:id", validateToken, (req, res) => {
   db("reviews")
     .where({ book_id: book_id })
     .delete()
-    .then(book => {
+    .then(() => {
       db("books")
         .where({ id: book_id })
         .first()
         .delete()
-        .then(count => {
+        .then(() => {
           res.status(204).end();
         });
     })
