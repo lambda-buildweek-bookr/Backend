@@ -35,7 +35,7 @@ router.get("/:book_id", (req, res) => {
 });
 
 router.post("/add/:book_id", validateToken, (req, res) => {
-  // console.log("req: ", req);
+  console.log("req: ", req);
   const { book_id } = req.params;
   const { rating, review, user_id } = req.body;
  
