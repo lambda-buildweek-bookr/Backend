@@ -1,5 +1,6 @@
 // book routes will go here
 
+
 const express = require("express");
 const db = require("../data/dbConfig.js");
 const { validateToken } = require("../auth/authenticate");
@@ -39,12 +40,12 @@ router.delete("/:id", validateToken, (req, res) => {
   const book_id = req.params.id;
   db("reviews")
     .where({ book_id: book_id })
-    .del()
+    .delete()
     .then(book => {
       db("books")
         .where({ id: book_id })
         .first()
-        .del()
+        .delete()
         .then(count => {
           res.status(204).end();
         });
