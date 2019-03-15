@@ -46,8 +46,9 @@ router.delete("/:id", validateToken, (req, res) => {
         .where({ id: book_id })
         .first()
         .delete()
-        .then(() => {
-          res.status(204).end();
+        db("books")
+        .then(books => {
+          res.status(200).json(books);
         });
     })
     .catch(err =>
