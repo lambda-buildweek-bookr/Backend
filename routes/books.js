@@ -1,6 +1,5 @@
 // book routes will go here
 
-
 const express = require("express");
 const db = require("../data/dbConfig.js");
 const { validateToken } = require("../auth/authenticate");
@@ -41,14 +40,13 @@ router.delete("/:id", validateToken, (req, res) => {
   db("reviews")
     .where({ book_id: book_id })
     .delete()
-    .then(() => {
+    .then(book => {
       db("books")
         .where({ id: book_id })
         .first()
         .delete()
-        db("books")
         .then(books => {
-          res.status(200).json(books);
+          res.status(204).json({message: "The book has been deleted" , books });
         });
     })
     .catch(err =>

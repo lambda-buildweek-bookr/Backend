@@ -184,19 +184,3 @@ Parameters:
 
 ---
 
-router.get("/:book_id", (req, res) => {
-  const id = req.params.book_id;
-  console.log(id);
-
-  db("books")
-    .where({ id })
-    .then(book => {
-      db.from("reviews")
-        .innerJoin("books", "books.id", "reviews.book_id")
-        .where("book_id", id)
-        .then(reviews => {
-          res.status(200).json({ book: book[0], reviews });
-        });
-    })
-    .catch(err => res.status(500).json({ Message: "Cannot retrieve that book" }));
-});
