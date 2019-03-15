@@ -45,13 +45,12 @@ router.delete("/:id", validateToken, (req, res) => {
         .where({ id: book_id })
         .first()
         .delete()
-        .then( () => {
-         
-          db("books")
-          .then(books => {
-            console.log("Books:  ", books);
-            res.status(200).json({message: "The book has been deleted" , books });
-          })
+        .then(() => {
+          db("books").then(books => {
+            res
+              .status(200)
+              .json({ message: "The book has been deleted", books });
+          });
         });
     })
     .catch(err =>
